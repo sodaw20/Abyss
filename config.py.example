@@ -1,0 +1,12 @@
+MONGODB_HOST = "localhost"
+MONGODB_USER = "admin"
+MONGODB_PASS = "test"
+MONGODB_DBSE = "admin"
+TICK_YES = "\N{WHITE HEAVY CHECK MARK}"
+TICK_NO = "\N{CROSS MARK}"
+DEBUG_WEBHOOK = "" # optional
+OWNERS = [ 123 ]
+TOKEN = ""
+COG_BLACKLIST = []
+REDIS = {"address": ("localhost",6379)}
+SPLASHES = ["placeholder"]

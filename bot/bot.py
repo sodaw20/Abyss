@@ -142,7 +142,8 @@ class Abyss(commands.AutoShardedBot):
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
         if self.cluster_name == 'beta':
-            super().__init__('beta$ ', **kwargs, loop=loop, activity=discord.Game(name='Testing shit'))
+            #super().__init__('beta$ ', **kwargs, loop=loop, activity=discord.Game(name='Testing shit'))
+            super().__init__('$', **kwargs, loop=loop, activity=discord.Game(name='Experimental bot!!'))
         else:
             super().__init__(commands.when_mentioned_or("$"), **kwargs, loop=loop,
                              activity=discord.Game(name="$help"))
@@ -162,6 +163,8 @@ class Abyss(commands.AutoShardedBot):
                 authSource=config.MONGODB_DBSE,
                 io_loop=self.loop
             )
+        print(self.db)
+        print(repr(self.db))
         self.redis = None
         self.session = aiohttp.ClientSession()
 
@@ -231,8 +234,8 @@ class Abyss(commands.AutoShardedBot):
     async def global_check(self, ctx):
         if not ctx.guild and ctx.author.id not in config.OWNERS:
             raise commands.NoPrivateMessage
-        if self.cluster_name == 'beta' and ctx.author.id not in config.OWNERS:
-            raise commands.NotOwner
+        #if self.cluster_name == 'beta' and ctx.author.id not in config.OWNERS:
+        #    raise commands.NotOwner
         return True
     
     def get_command(self, name):

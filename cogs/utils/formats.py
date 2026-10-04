@@ -151,13 +151,17 @@ class NotSearched(commands.CommandError):
 def ensure_player(func):
     async def predicate(ctx):
         try:
+            print("ensure_player: written ctx.player from bot.players.players")
             ctx.player = ctx.bot.players.players[ctx.author.id]
         except KeyError:
             pdata = await ctx.bot.db.abyss.accounts.find_one({"owner": ctx.author.id})
             if not pdata:
+                print("ensure_player: could not find player from db")
                 raise NoPlayer()
             ctx.player = ctx.bot.players.players[ctx.author.id] = Player(**pdata)
+            print("ensure_player: got Player from db")
             await ctx.player.populate_skills(ctx.bot)
+            print("ensure_player: populated skills")
         return True
 
     return commands.check(predicate)(func)

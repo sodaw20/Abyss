@@ -522,6 +522,11 @@ Fast-forward
 
     @dev.command()
     @ensure_player
+    async def test(self,ctx):
+        await ctx.send(f"ensure_player ran; `dir(ctx)` below;\n```py\n{dir(ctx)}\n```")
+
+    @dev.command()
+    @ensure_player
     async def force_treasure_demon_battle(self, ctx):
         mp_cog = self.bot.get_cog('Maps')
         demons = list(filter(lambda d: d['level'] >= ctx.player.level, mp_cog.treasure_demon_data))

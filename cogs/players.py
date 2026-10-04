@@ -79,6 +79,7 @@ def stats_page(player):
 
 async def status(ctx):
     player = ctx.player
+    print("player.owner",type(player.owner))
     embed = discord.Embed(title=f"Lvl{player.level} {player.name}",
                           colour=lookups.TYPE_TO_COLOUR[player.specialty.name.lower()])
     embed.set_author(name=player.owner, icon_url=player.owner.avatar_url_as(format="png", size=32))
@@ -312,7 +313,6 @@ class Players(commands.Cog):
     @ensure_player
     async def status(self, ctx):
         """Gets your current players status."""
-
         await status(ctx)  # todo: maybe move this? idk its a lot of shit i dont want to break
 
     @commands.command()

@@ -1,0 +1,27 @@
+services:
+  
+  redis_in:
+    image: redis/redisinsight:latest
+    ports:
+      - "5540:5540"
+
+  mongo_ex:
+    image: mongo-express:latest
+    ports:
+      - "8081:8081"
+
+  mongo:
+    image: dubc/mongodb-4.0
+    environment:
+      AUTH: "no"
+    ports:
+      - "27017:27017"
+      - "28017:28017"
+    volumes:
+      - ./db:/data/db:z
+    stop_grace_period: 5m
+
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"

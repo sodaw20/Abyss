@@ -116,8 +116,14 @@ class Player(JSONable):
 
     async def populate_skills(self, bot):
         self.owner = bot.get_user(self._owner_id)
+        if not self.owner:
+            print("warning: could not get user in populate_skills; trying fetch")
+            print("user id is",self._owner_id," and type ",type(self._owner_id))
+            self.owner = await bot.fetch_user(self._owner_id)
         if self.map:
             self.map = bot.map_handler.maps[self.map]
+        else:
+            print("populate_skills: warning: map_handler not available")
         self.inventory = Inventory(bot, self, self.inventory)
         for skill in self.pre_skills:
             self.skills.append(bot.players.skill_cache[skill])
